@@ -1,10 +1,14 @@
 # Xwinwrap
 
-My fork of xwinwrap.  
-Xwinwrap allows you to stick most of the apps to your desktop background.  
-My use case - can use gif as a background
+Fork of xwinwrap.  
+Xwinwrap allows you to stick an app such as a videoplayer or gif viewer to your desktop background.  
+Gif as a background:
 
-![demo gif](https://github.com/ujjwal96/xwinwrap/blob/demo/demo.gif)
+![demo gif](https://github.com/aaahh/xwinwrap/blob/master/examples/demo-gif.gif)
+
+Video as a background:
+
+![demo gif](https://github.com/aaahh/xwinwrap/blob/master/examples/demo-video.gif)
 
 ### Installing
 
@@ -40,12 +44,13 @@ Options:
 ```
 Example
 `xwinwrap -g 400x400 -ni -s -nf -b -un -argb -sh circle -- gifview -w WID mygif.gif -a`
-
+`nice xwinwrap -b -s -fs -st -sp -nf -ov -fdt -- mpv -wid WID --really-quiet --framedrop=vo --no-audio --panscan="1.0" /path/to/your/video`
 ### Changes
 
 * Added ability to make undecorated window
 * Changed how desktop window is found
 * Refactored window hints
+* Add DESKTOP window type flag
 
 ----
 Original source - https://launchpad.net/xwinwrap
