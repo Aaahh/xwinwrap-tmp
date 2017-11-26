@@ -6,7 +6,7 @@ Gif as a background:
 
 ![demo gif](https://github.com/aaahh/xwinwrap/blob/master/examples/demo-gif.gif)
 
-Video as a background:
+Video as a background (it is much smoother than the gif would make it appear):
 
 ![demo gif](https://github.com/aaahh/xwinwrap/blob/master/examples/demo-video.gif)
 
@@ -14,7 +14,7 @@ Video as a background:
 
 ```
 sudo apt-get install xorg-dev build-essential libx11-dev x11proto-xext-dev libxrender-dev libxext-dev
-git clone https://github.com/ujjwal96/xwinwrap.git
+git clone https://github.com/aaahh/xwinwrap.git
 cd xwinwrap
 make
 sudo make install
@@ -44,6 +44,7 @@ Options:
 ```
 Example
 `xwinwrap -g 400x400 -ni -s -nf -b -un -argb -sh circle -- gifview -w WID mygif.gif -a`
+
 `nice xwinwrap -b -s -fs -st -sp -nf -ov -fdt -- mpv -wid WID --really-quiet --framedrop=vo --no-audio --panscan="1.0" /path/to/your/video`
 ### Changes
 
