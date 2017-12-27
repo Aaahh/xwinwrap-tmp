@@ -177,13 +177,15 @@ static void sigHandler (int sig)
 static void usage (void)
 {
     fprintf(stderr, "%s \n", NAME);
-    fprintf (stderr, "\nUsage: %s [-g {w}x{h}+{x}+{y}] [-ni] [-argb] [-fdt] [-fs] [-s] [-st] [-sp] [-a] [-d] "
-             "[-b] [-nf] [-o OPACITY] [-sh SHAPE] [-ov]-- COMMAND ARG1...\n", NAME);
+    fprintf (stderr, "\nUsage: %s [-g {w}x{h}+{x}+{y}] [-ni] [-argb] [-fdt]\n \
+               [-fs] [-un] [-s] [-st] [-sp] [-a] [-b] [-nf] [-o OPACITY]\n \
+               [-sh SHAPE] [-ov] [-d] [-debug] -- COMMAND ARG1...\n", NAME);
     fprintf (stderr, "Options:\n \
-            -g      - Specify Geometry (w=width, h=height, x=x-coord, y=y-coord. ex: -g 640x480+100+100)\n \
+            -g      - Specify Geometry (w=width, h=height, x=x-coord,\n \
+                      y=y-coord. ex: -g 640x480+100+100)\n \
             -ni     - Ignore Input\n \
             -argb   - RGB\n \
-            -fdt    - force WID window a desktop type window\n \
+            -fdt    - Force WID window a desktop type window\n \
             -fs     - Full Screen\n \
             -un     - Undecorated\n \
             -s      - Sticky\n \
@@ -193,8 +195,10 @@ static void usage (void)
             -b      - Below\n \
             -nf     - No Focus\n \
             -o      - Opacity value between 0 to 1 (ex: -o 0.20)\n \
-            -sh     - Shape of window (choose between rectangle, circle or triangle. Default is rectangle)\n \
-            -ov     - Set override_redirect flag (For seamless desktop background integration in non-fullscreenmode)\n \
+            -sh     - Shape of window (choose between rectangle, circle or\n \
+                      triangle. Default is rectangle)\n \
+            -ov     - Set override_redirect flag (For seamless desktop\n \
+                      background integration in non-fullscreenmode)\n \
             -d      - Daemonize\n \
             -debug  - Enable debug messages\n");
 }
