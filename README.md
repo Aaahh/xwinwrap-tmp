@@ -26,7 +26,7 @@ make clean
 ```
 Usage: xwinwrap [-g {w}x{h}+{x}+{y}] [-ni] [-argb] [-fdt]
                 [-fs] [-un] [-s] [-st] [-sp] [-a] [-b] [-nf] [-o OPACITY]
-                [-sh SHAPE] [-ov] [-d] [-debug] -- COMMAND ARG1...
+                [-sh SHAPE] [-ov] [-ovr] [-d] [-debug] -- COMMAND ARG1...
 Options:
              -g      - Specify Geometry (w=width, h=height, x=x-coord,
                        y=y-coord. ex: -g 640x480+100+100)
@@ -45,7 +45,10 @@ Options:
              -sh     - Shape of window (choose between rectangle, circle or
                        triangle. Default is rectangle)
              -ov     - Set override_redirect flag (For seamless desktop
-                       background integration in non-fullscreenmode)
+                       background integration in non-fullscreenmode) (can cause
+                       artifacts on some environments)
+             -ovr    - Set override_redirect flag on root window (For seamless
+                       desktop background integration in fullscreenmode)
              -d      - Daemonize
              -debug  - Enable debug messages
 ```

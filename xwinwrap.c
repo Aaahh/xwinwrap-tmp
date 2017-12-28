@@ -179,7 +179,7 @@ static void usage (void)
     fprintf(stderr, "%s \n", NAME);
     fprintf (stderr, "\nUsage: %s [-g {w}x{h}+{x}+{y}] [-ni] [-argb] [-fdt]\n \
                [-fs] [-un] [-s] [-st] [-sp] [-a] [-b] [-nf] [-o OPACITY]\n \
-               [-sh SHAPE] [-ov] [-d] [-debug] -- COMMAND ARG1...\n", NAME);
+               [-sh SHAPE] [-ov] [-ovr] [-d] [-debug] -- COMMAND ARG1...\n", NAME);
     fprintf (stderr, "Options:\n \
             -g      - Specify Geometry (w=width, h=height, x=x-coord,\n \
                       y=y-coord. ex: -g 640x480+100+100)\n \
@@ -198,7 +198,10 @@ static void usage (void)
             -sh     - Shape of window (choose between rectangle, circle or\n \
                       triangle. Default is rectangle)\n \
             -ov     - Set override_redirect flag (For seamless desktop\n \
-                      background integration in non-fullscreenmode)\n \
+                      background integration in non-fullscreenmode) (can cause\n \
+                      artifacts on some environments)\n \
+            -ovr    - Set override_redirect flag on root window (For seamless\n \
+                      desktop background integration in fullscreenmode)\n \
             -d      - Daemonize\n \
             -debug  - Enable debug messages\n");
 }
@@ -328,6 +331,7 @@ int main(int argc, char **argv)
     bool fullscreen = false;
     bool noFocus = false;
     bool override = false;
+    bool overrideroot = false;
     bool undecorated = false;
     bool sticky = false;
     bool below = false;
@@ -418,6 +422,10 @@ int main(int argc, char **argv)
         {
             override = true;
         }
+        else if (strcmp (argv[i], "-ovr") == 0)
+        {
+            overrideroot = true;
+        }
         else if (strcmp (argv[i], "-debug") == 0)
         {
             debug = true;
@@ -488,7 +496,7 @@ int main(int argc, char **argv)
     if (!display)
         return 1;
 
-    if (fullscreen)
+    if (fullscreen || overrideroot)
     {
         window.x = 0;
         window.y = 0;
@@ -519,9 +527,35 @@ int main(int argc, char **argv)
 
     }
 
-    if (override) {
+    if (overrideroot) {
         /* An override_redirect True window.
          * No WM hints or button processing needed. */
+        XSetWindowAttributes attrs = { ParentRelative, 0L, 0, 0L, 0, 0,
+                                       Always, 0L, 0L, False, StructureNotifyMask | ExposureMask, 0L,
+                                       True, 0, 0
+                                     };
+
+        if (have_argb_visual)
+        {
+            attrs.colormap = window.colourmap;
+            flags |= CWBorderPixel | CWColormap;
+        }
+        else
+        {
+            flags |= CWBackPixel;
+        }
+
+        window.window = XCreateWindow(display, window.root, window.x,
+                                      window.y, window.width, window.height, 0, depth, InputOutput, visual,
+                                      flags, &attrs);
+        XLowerWindow(display, window.window);
+
+        fprintf(stderr, NAME": window type - override\n");
+        fflush(stderr);
+    }
+    else if (override) {
+        /* An override_redirect True window.
+        * No WM hints or button processing needed. */
         XSetWindowAttributes attrs = { ParentRelative, 0L, 0, 0L, 0, 0,
                                        Always, 0L, 0L, False, StructureNotifyMask | ExposureMask, 0L,
                                        True, 0, 0
