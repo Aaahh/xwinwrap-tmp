@@ -469,9 +469,11 @@ int main(int argc, char **argv)
         }
 
         chdir("/");
-        close(STDIN_FILENO);
-        close(STDOUT_FILENO);
-        close(STDERR_FILENO);
+        if (!debug) {
+          close(STDIN_FILENO);
+          close(STDOUT_FILENO);
+          close(STDERR_FILENO);
+        }
     }
 
     for (i = i + 1; i < argc; i++)
