@@ -42,6 +42,10 @@
  *                 Currently supporting circlular and triangular windows
  */
 
+/*
+ * Picked up by Aaahh, https://github.com/Aaahh/xwinwrap
+ */
+
 #include <X11/Xlib.h>
 #include <X11/Xutil.h>
 #include <X11/Xatom.h>
@@ -461,6 +465,7 @@ int main(int argc, char **argv) {
     visual = CopyFromParent;
   }
 
+  Atom xa;
   if (overrideroot) {
     /* An override_redirect True window.
      * No WM hints or button processing needed. */
@@ -491,7 +496,17 @@ int main(int argc, char **argv) {
                                   window.width, window.height, 0, depth,
                                   InputOutput, visual, flags, &attrs);
     XLowerWindow(display, window.window);
+    xa = ATOM(_NET_WM_WINDOW_TYPE);
 
+    Atom prop;
+    if (set_desktop_type) {
+      prop = ATOM(_NET_WM_WINDOW_TYPE_DESKTOP);
+    } else {
+      prop = ATOM(_NET_WM_WINDOW_TYPE_NORMAL);
+    }
+
+    XChangeProperty(display, window.window, xa, XA_ATOM, 32, PropModeReplace,
+                    (unsigned char *)&prop, 1);
     fprintf(stderr, NAME ": window type - override\n");
     fflush(stderr);
   } else if (override) {
@@ -546,7 +561,6 @@ int main(int argc, char **argv) {
                                   0};
 
     XWMHints wmHint;
-    Atom xa;
 
     if (have_argb_visual) {
       attrs.colormap = window.colourmap;
@@ -568,7 +582,6 @@ int main(int argc, char **argv) {
                      &wmHint, NULL);
 
     xa = ATOM(_NET_WM_WINDOW_TYPE);
-
     Atom prop;
     if (set_desktop_type) {
       prop = ATOM(_NET_WM_WINDOW_TYPE_DESKTOP);
