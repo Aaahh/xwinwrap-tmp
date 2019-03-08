@@ -170,7 +170,7 @@ static int get_argb_visual(Visual **visual, int *depth) {
 static void sigHandler(int sig) { kill(pid, sig); }
 
 static void usage(void) {
-  fprintf(stderr, "%s \n", NAME);
+  fprintf(stderr, "%s v%s \n", NAME, VERSION);
   fprintf(stderr, "\nUsage: %s [-g {w}x{h}+{x}+{y}] [-ni] [-argb] [-fdt]\n \
                [-fs] [-un] [-s] [-st] [-sp] [-a] [-b] [-nf] [-o OPACITY]\n \
                [-sh SHAPE] [-ov] [-ovr] [-d] [-debug] -- COMMAND ARG1...\n",
