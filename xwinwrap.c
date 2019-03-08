@@ -70,6 +70,7 @@
 #define OPAQUE 0xffffffff
 
 #define NAME "xwinwrap"
+#define VERSION "0.9"
 
 #define ATOM(a) XInternAtom(display, #a, False)
 
