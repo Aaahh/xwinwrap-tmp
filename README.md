@@ -14,7 +14,7 @@ Video as a background (it is much smoother than the gif would make it appear):
 
 ```
 sudo apt-get install xorg-dev build-essential libx11-dev x11proto-xext-dev libxrender-dev libxext-dev
-git clone https://github.com/aaahh/xwinwrap.git
+git clone https://github.com/mmhobi7/xwinwrap.git
 cd xwinwrap
 make
 sudo make install
