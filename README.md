@@ -21,14 +21,26 @@ sudo make install
 make clean
 ```
 
+### Uninstalling 
+
+```
+cd /path/to/xwinwrap
+make
+sudo make uninstall
+make clean
+cd ..
+rm -r xwinwrap
+```
+
 ### Usage
 
 ```
-Usage: xwinwrap [-g {w}x{h}+{x}+{y}] [-ni] [-argb] [-fdt]
-                [-fs] [-un] [-s] [-st] [-sp] [-a] [-b] [-nf] [-o OPACITY]
-                [-sh SHAPE] [-ov] [-ovr] [-d] [-debug] -- COMMAND ARG1...
+Usage: 
+    xwinwrap [OPTIONS...] -- <video-player> [VIDEO-PLAYER OPTIONS...] <video-file>
+ 
 Options:
-             -g      - Specify Geometry (w=width, h=height, x=x-coord,
+             -g {w}x{h}+{x}+{y}    
+                     - Specify Geometry (w=width, h=height, x=x-coord,
                        y=y-coord. ex: -g 640x480+100+100)
              -ni     - Ignore Input
              -argb   - RGB
