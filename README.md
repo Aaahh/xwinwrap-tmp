@@ -25,9 +25,7 @@ make clean
 
 ```
 cd /path/to/xwinwrap
-make
 sudo make uninstall
-make clean
 cd ..
 rm -r xwinwrap
 ```
