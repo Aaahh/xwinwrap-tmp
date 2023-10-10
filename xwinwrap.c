@@ -496,6 +496,10 @@ int main(int argc, char **argv) {
     window.window = XCreateWindow(display, window.root, window.x, window.y,
                                   window.width, window.height, 0, depth,
                                   InputOutput, visual, flags, &attrs);
+    XClassHint classHint;
+    classHint.res_name = "Xwinwrap";
+    classHint.res_class = "Xwinwrap";
+    XSetClassHint(display, window.window, &classHint);
     XLowerWindow(display, window.window);
     xa = ATOM(_NET_WM_WINDOW_TYPE);
 
@@ -539,6 +543,10 @@ int main(int argc, char **argv) {
     window.window = XCreateWindow(display, window.desktop, window.x, window.y,
                                   window.width, window.height, 0, depth,
                                   InputOutput, visual, flags, &attrs);
+                                  XClassHint classHint;
+    classHint.res_name = "Xwinwrap";
+    classHint.res_class = "Xwinwrap";
+    XSetClassHint(display, window.window, &classHint);
     XLowerWindow(display, window.window);
 
     fprintf(stderr, NAME ": window type - override\n");
@@ -573,6 +581,10 @@ int main(int argc, char **argv) {
     window.window = XCreateWindow(display, window.root, window.x, window.y,
                                   window.width, window.height, 0, depth,
                                   InputOutput, visual, flags, &attrs);
+    XClassHint classHint;
+    classHint.res_name = "Xwinwrap";
+    classHint.res_class = "Xwinwrap";
+    XSetClassHint(display, window.window, &classHint);
 
     wmHint.flags = InputHint | StateHint;
     // wmHint.input = undecorated ? False : True;
